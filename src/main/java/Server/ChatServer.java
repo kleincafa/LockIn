@@ -81,13 +81,13 @@ public class ChatServer {
                    // TODO: broadcast message
                     synchronized (clientHandlers) {
                         for (ClientHandler handler : clientHandlers) {
-                            if(message.contains("ANS-")){
+                            if (message.startsWith("POMO-")) { // Pomodoro Sync
                                 handler.out.println(message);
-                            }
-                            if(message.contains("NEWQ")){
+                            } else if (message.contains("ANS-")) {
                                 handler.out.println(message);
-                            }
-                            else{
+                            } else if (message.contains("NEWQ")) {
+                                handler.out.println(message);
+                            } else {
                                 handler.out.println(username + ": " + message);
                             }
                         }
